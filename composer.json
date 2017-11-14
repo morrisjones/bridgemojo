@@ -6,7 +6,11 @@
     "require": {
         "composer/installers": "^1.0.24",
         "wikimedia/composer-merge-plugin": "^1.4",
-        "drush/drush": "^8.1"
+        "drush/drush": "^8.1",
+        "drupal/bootstrap": "^3.6",
+        "drupal/smtp": "^1.0@beta",
+        "drupal/recaptcha": "^2.2",
+        "drupal/fontyourface": "3.x-dev"
     },
     "replace": {
         "drupal/core": "^8.4"
