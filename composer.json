@@ -9,7 +9,10 @@
         "drush/drush": "^8.1",
         "drupal/bootstrap": "^3.6",
         "drupal/smtp": "^1.0@beta",
-        "drupal/recaptcha": "^2.2"
+        "drupal/recaptcha": "^2.2",
+        "drupal/twitter_block": "3.0-alpha0",
+        "drupal/picture": "^1.0",
+        "drupal/inline_responsive_images": "^2.1"
     },
     "replace": {
         "drupal/core": "^8.4"
