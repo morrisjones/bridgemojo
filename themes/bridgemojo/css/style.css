@@ -74,3 +74,9 @@ img.align-center {
   padding-top: 5px;
   border-top: 1px solid black;
 }
+.feed-icons {
+  display: none;
+}
+article.teaser {
+    border-bottom: 1px solid grey;
+}
