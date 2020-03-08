@@ -288,7 +288,9 @@
       .filter()
 
       // Clean the class to ensure it's a valid class name.
-      .map(Attributes.cleanClass)
+      .map(function (value) {
+        return Attributes.cleanClass(value);
+      })
 
       // Ensure classes are unique.
       .uniq()
@@ -343,17 +345,17 @@
     identifier = identifier.toLowerCase();
 
     if (filter['__'] === void 0) {
-      identifier = identifier.replace('__', '#DOUBLE_UNDERSCORE#', identifier);
+      identifier = identifier.replace('__', '#DOUBLE_UNDERSCORE#');
     }
 
-    identifier = identifier.replace(Object.keys(filter), Object.values(filter), identifier);
+    identifier = identifier.replace(Object.keys(filter), Object.keys(filter).map(function(key) { return filter[key]; }));
 
     if (filter['__'] === void 0) {
-      identifier = identifier.replace('#DOUBLE_UNDERSCORE#', '__', identifier);
+      identifier = identifier.replace('#DOUBLE_UNDERSCORE#', '__');
     }
 
-    identifier = identifier.replace(/[^\u002D\u0030-\u0039\u0041-\u005A\u005F\u0061-\u007A\u00A1-\uFFFF]/u, '', identifier);
-    identifier = identifier.replace(['/^[0-9]/', '/^(-[0-9])|^(--)/'], ['_', '__'], identifier);
+    identifier = identifier.replace(/[^\u002D\u0030-\u0039\u0041-\u005A\u005F\u0061-\u007A\u00A1-\uFFFF]/g, '');
+    identifier = identifier.replace(['/^[0-9]/', '/^(-[0-9])|^(--)/'], ['_', '__']);
 
     return identifier;
   };

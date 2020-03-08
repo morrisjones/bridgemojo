@@ -11,7 +11,39 @@ use Drupal\migrate\Row;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides entity destination plugin.
+ * Provides a generic destination to import entities.
+ *
+ * Examples:
+ *
+ * @code
+ * source:
+ *   plugin: d7_node
+ * process:
+ *   nid: tnid
+ *   vid: vid
+ *   langcode: language
+ *   title: title
+ *   ...
+ *   revision_timestamp: timestamp
+ * destination:
+ *   plugin: entity:node
+ * @endcode
+ *
+ * This will save the processed, migrated row as a node.
+ *
+ * @code
+ * source:
+ *   plugin: d7_node
+ * process:
+ *   nid: tnid
+ *   vid: vid
+ *   langcode: language
+ *   title: title
+ *   ...
+ *   revision_timestamp: timestamp
+ * destination:
+ *   plugin: entity:node
+ * @endcode
  *
  * @MigrateDestination(
  *   id = "entity",
@@ -53,6 +85,10 @@ abstract class Entity extends DestinationBase implements ContainerFactoryPluginI
    *   The list of bundles this entity type has.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, EntityStorageInterface $storage, array $bundles) {
+    $plugin_definition += [
+      'label' => $storage->getEntityType()->getPluralLabel(),
+    ];
+
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration);
     $this->storage = $storage;
     $this->bundles = $bundles;
@@ -69,8 +105,8 @@ abstract class Entity extends DestinationBase implements ContainerFactoryPluginI
       $plugin_id,
       $plugin_definition,
       $migration,
-      $container->get('entity.manager')->getStorage($entity_type_id),
-      array_keys($container->get('entity.manager')->getBundleInfo($entity_type_id))
+      $container->get('entity_type.manager')->getStorage($entity_type_id),
+      array_keys($container->get('entity_type.bundle.info')->getBundleInfo($entity_type_id))
     );
   }
 

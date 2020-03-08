@@ -80,3 +80,9 @@ img.align-center {
 article.teaser {
     border-bottom: 1px solid grey;
 }
+.hs {
+  color: red;
+}
+.ds {
+  color: red;
+}

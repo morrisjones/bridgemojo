@@ -5,12 +5,15 @@ namespace Drupal\update\Form;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Link;
 use Drupal\Core\State\StateInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure update settings for this site.
+ *
+ * @internal
  */
 class UpdateManagerUpdate extends FormBase {
 
@@ -106,7 +109,7 @@ class UpdateManagerUpdate extends FormBase {
       // The project name to display can vary based on the info we have.
       if (!empty($project['title'])) {
         if (!empty($project['link'])) {
-          $project_name = $this->l($project['title'], Url::fromUri($project['link']));
+          $project_name = Link::fromTextAndUrl($project['title'], Url::fromUri($project['link']))->toString();
         }
         else {
           $project_name = $project['title'];

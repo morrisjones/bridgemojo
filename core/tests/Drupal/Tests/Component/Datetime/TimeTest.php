@@ -20,7 +20,7 @@ class TimeTest extends TestCase {
   /**
    * The mocked request stack.
    *
-   * @var \Symfony\Component\HttpFoundation\RequestStack|\PHPUnit_Framework_MockObject_MockObject
+   * @var \Symfony\Component\HttpFoundation\RequestStack|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $requestStack;
 
@@ -37,8 +37,7 @@ class TimeTest extends TestCase {
   protected function setUp() {
     parent::setUp();
 
-    $this->requestStack = $this->getMock('Symfony\Component\HttpFoundation\RequestStack');
-
+    $this->requestStack = $this->getMockBuilder('Symfony\Component\HttpFoundation\RequestStack')->getMock();
     $this->time = new Time($this->requestStack);
   }
 

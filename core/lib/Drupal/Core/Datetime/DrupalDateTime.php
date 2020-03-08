@@ -16,7 +16,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
  *
  * DrupalDateTime::createFromArray( array('year' => 2010, 'month' => 9, 'day' => 28) )
  *
- * @see \Drupal/Component/Datetime/DateTimePlus.php
+ * @see \Drupal\Component\Datetime\DateTimePlus
  */
 class DrupalDateTime extends DateTimePlus {
 
@@ -24,6 +24,8 @@ class DrupalDateTime extends DateTimePlus {
 
   /**
    * Format string translation cache.
+   *
+   * @var string
    */
   protected $formatTranslationCache;
 
@@ -38,7 +40,7 @@ class DrupalDateTime extends DateTimePlus {
    *   timezone are ignored when the $time parameter either is a UNIX timestamp
    *   (e.g. @946684800) or specifies a timezone
    *   (e.g. 2010-01-28T15:00:00+02:00).
-   *   @see http://php.net/manual/en/datetime.construct.php
+   *   @see http://php.net/manual/datetime.construct.php
    * @param array $settings
    *   - validate_format: (optional) Boolean choice to validate the
    *     created date using the input format. The format used in
@@ -71,7 +73,7 @@ class DrupalDateTime extends DateTimePlus {
   protected function prepareTimezone($timezone) {
     if (empty($timezone)) {
       // Fallback to user or system default timezone.
-      $timezone = drupal_get_user_timezone();
+      $timezone = date_default_timezone_get();
     }
     return parent::prepareTimezone($timezone);
   }
